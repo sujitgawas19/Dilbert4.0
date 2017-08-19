@@ -1,14 +1,22 @@
+
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-navbar>
+	<ion-navbar align="center">
+		<ion-title>Dilbert</ion-title>
+	</ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+
+<ion-content align = "center" padding>
+
+	<h2 text-center ion-text color="dark">
+		Track time. Record work!
+	</h2>
+
+
+	<div padding>
+		<button  ion-button block (click) = "signIn()" [disabled]="disabled" (click)="disabled=true">View Monthly summary </button>
+	</div>
+
+
+
 </ion-content>

@@ -1,0 +1,69 @@
+<!--
+  Generated template for the SummaryPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+	<ion-navbar align="center">
+		<ion-title>Summary</ion-title>
+	</ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+
+<ion-grid>
+
+  <ion-row>
+  <ion-col>
+  <button>
+  Employees
+  </button>
+  </ion-col>
+  <ion-col>
+  Week1
+  </ion-col><ion-col>
+  Week2
+  </ion-col><ion-col>
+  Week3
+  </ion-col><ion-col>
+  Week4
+  </ion-col><ion-col>
+  Week5
+  </ion-col>
+  </ion-row>
+
+
+  <ion-row *ngFor="let row of userSummary">
+    <ion-col width-50 >
+
+    <button class = "button-container" style="background-color: white;border: 1px solid;">
+      {{row.name}}
+
+      </button>
+    </ion-col>
+    <ion-col>
+    {{row.summary.data[0].total_time}}
+    </ion-col>
+     <ion-col>
+    {{row.summary.data[1].total_time}}
+    </ion-col>
+     <ion-col>
+    {{row.summary.data[2].total_time}}
+    </ion-col>
+     <ion-col>
+    {{row.summary.data[3].total_time}}
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+
+<!-- <ion-list >
+    <ion-item *ngFor="let item of userSummary">
+      {{ item.name }}
+    </ion-item>
+  </ion-list> -->
+
+</ion-content>
