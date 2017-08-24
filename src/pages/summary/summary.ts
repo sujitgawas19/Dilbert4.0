@@ -25,7 +25,7 @@ export class SummaryPage {
     };
 
 
-  private model: Object = { date: { year: new Date().getFullYear(), month: new Date().getMonth()+1, day: new Date().getDate() } };
+  private model: any = { date: { year: new Date().getFullYear(), month: new Date().getMonth()+1, day: new Date().getDate() } };
 
 	private userSummary: any[];
   private userSummary2: any[];
@@ -38,16 +38,20 @@ export class SummaryPage {
   private flag3 : number;
   private date : any;
 
-  constructor(public navCtrl: NavController, 
-  				public navParams: NavParams,
-  				private userData : UserDataProvider) {
-    console.log(this.myDate);
-    this.flag = 0;
+  constructor(  public navCtrl: NavController, 
+        				public navParams: NavParams,
+        				private userData : UserDataProvider){
+
+      console.log(this.myDate);
+      this.flag = 0;
+      console.log(this.model.date.month);
+      this.getUserDate();
   }
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SummaryPage');
-    this.getUserDate();
+    
   }
 
   getData(date){
@@ -73,29 +77,39 @@ export class SummaryPage {
 }
 
   previousMonth(){
-    if(this.date.start_date == 1)
+    if(this.date.month == 1)
     {
-      this.date.start_date =12;
-      this.date.end_date =  parseInt(this.date.end_date) - 1;
+      this.date.month =12;
+      this.date.year =  parseInt(this.date.year) - 1;
+      // this.model.date.month = 12;
+      // this.model.date.year = parseInt(this.date.end_date);
     }
     else{
-      this.date.start_date = parseInt(this.date.start_date) - 1;
+      this.date.month = parseInt(this.date.month) - 1;
+      // this.model.date.month = parseInt(this.date.start_date);
     }
+
     this.getData(this.date);
+    console.log(this.model);
 
   }
 
+
   nextMonth(){
  
-  if(this.date.start_date == 12)
+  if(this.date.month == 12)
     {
-      this.date.start_date =1;
-      this.date.end_date =  parseInt(this.date.end_date) + 1;;
+      this.date.month =1;
+      this.date.year =  parseInt(this.date.year) + 1;
+      // this.model.date.month = 1;
+      // this.model.date.year = parseInt(this.date.end_date);
     }
     else{
-      this.date.start_date =  parseInt(this.date.start_date) + 1;;
+      this.date.month =  parseInt(this.date.month) + 1;
+      // this.model.date.month = parseInt(this.date.start_date);
     }
     this.getData(this.date);
+    console.log(this.model);
 
   }
 
@@ -133,6 +147,8 @@ this.userSummary = this.userSummary.sort((obj1,obj2) => {
     this.flag2[i] = 0;
    }
 }
+
+
 
   filterByTime(row){
     this.flag = 1;
@@ -179,6 +195,8 @@ this.userSummary = this.userSummary.sort((obj1,obj2) => {
 
 }
 
+
+
  filterByTime2(){
 
         this.flag=1;
@@ -214,19 +232,22 @@ this.userSummary = this.userSummary.sort((obj1,obj2) => {
 
  }
 
+
+
   requestData(ev){
+
     console.log(ev);
 
     //  let inputDate = ev.formatted.split('.');
     // console.log(inputDate);
-
+    if(ev.date.year != 0 && ev.date.month != 0){
     this.date = {
-            end_date : ev.date.year,
+            year : ev.date.year,
             // start_date : curr.getMonth()+1
-            start_date : ev.date.month
+            month : ev.date.month
           };
           console.log(this.date);
-          if(this.date.start_date != 0 && this.date.end_date != 0){
+          
           this.getData(this.date);
           }
 
@@ -234,54 +255,13 @@ this.userSummary = this.userSummary.sort((obj1,obj2) => {
 
 
 
-	formatDate(date) {
-      let temp = new Date(date);
-      return temp.getFullYear() + '-' + (temp.getMonth() + 1) + '-' + temp.getDate();
-    }
-
-    getDaysInMonth(month, year){
-    	return new Date(year, month, 0).getDate();
-    }
-
-
-    getStartAndEndOfDate(date) {
-      // if (isMonth) {
-      //   let temp = new Date(date), y = temp.getFullYear(), m = temp.getMonth();
-      //   let firstDay = new Date(y, m, 1);
-      //   let lastDay = new Date(y, m + 1, 0);
-      //   return {
-      //     start : firstDay,
-      //     end : lastDay
-      //   };
-      // }else {
-        let curr = new Date();
-        let first = 1; // First day is the day of the month
-        let last = this.getDaysInMonth(curr.getMonth(), curr.getFullYear()); // last day is the first day + 6
-
-
-        console.log(last);
-
-        let firstDay = new Date(curr.setDate(first));
-        let lastDay = new Date(curr.setDate(last));
-        return {
-          start : firstDay,
-          end : lastDay
-        };
-    }
     getUserDate() {
-
-
-          // let dates = this.getStartAndEndOfDate(new Date());
-          // let date = {
-          //   start_date: this.formatDate(dates.start),
-          //   end_date: this.formatDate(dates.end)
-          // };
           let curr = new Date();
 
           this.date = {
-            end_date : curr.getFullYear(),
-            // start_date : curr.getMonth()+1
-            start_date : "6"
+            year : curr.getFullYear(),
+            month : curr.getMonth()+1
+            // start_date : "6"
           };
           console.log(this.date);
           this.getData(this.date);

@@ -34,7 +34,7 @@ export class UserDataProvider {
 	let fetchurl = `${apiURL}?user_id=${id}`;
 	 
 	if (date) {
-      fetchurl += `&month=${date.start_date}&year=${date.end_date}`;
+      fetchurl += `&month=${date.month}&year=${date.year}`;
     } 
     console.log(fetchurl);  
     return this.http.get(fetchurl, { headers: this.headers })

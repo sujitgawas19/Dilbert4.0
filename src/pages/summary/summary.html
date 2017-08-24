@@ -14,103 +14,107 @@
 
 <ion-content padding>
 
-<div class="fixed-bottom-color"> </div>
+  <div class="fixed-bottom-color"> </div>
 
-<div class="card-body"  class="card">
+    <div class="card-body"  class="card">
 
-<div class="form-control"> 
+      <div class="form-control"> 
 
 
-<ion-grid floating >
+        <ion-grid floating >
 
-<ion-row >
-<ion-col col-3>
-<ion-searchbar class = "search-bar" (ionInput)="callFilter()" [(ngModel)]="myInput"  autocomplete = "on" autocorrect = "on" placeholder = "Filter by Name"></ion-searchbar>
-</ion-col>
+          <ion-row >
+            <ion-col col-3>
+                <ion-searchbar class = "search-bar" (ionInput)="callFilter()" [(ngModel)]="myInput"  autocomplete = "on" autocorrect = "on" placeholder = "Filter by Name"></ion-searchbar>
+            </ion-col>
 
-<ion-col offset-2>
+            <ion-col offset-5>
 
-  <!-- <form #myForm="ngForm" novalidate> -->
-    <my-date-picker [options]="myDatePickerOptions" (dateChanged)="requestData($event)"
-                    [(ngModel)]="model" required placeholder = "Jump to date">
+                <my-date-picker [options]="myDatePickerOptions" (dateChanged)="requestData($event)" [(ngModel)]="model" required placeholder = "Jump to date" >
                     
-    </my-date-picker>
-<!-- </form> -->
-  <!-- <ion-datetime displayFormat="MM/YYYY" pickerFormat="MMMM YYYY" [(ngModel)]="myDate" (ionChange) = "requestData()"></ion-datetime> -->
-</ion-col>
+                </my-date-picker>
+            </ion-col>
 
 
-<ion-col offset-2>
-<button (click) = "previousMonth()" >
-<ion-icon name="arrow-dropleft"></ion-icon>
-</button>
-</ion-col> 
-
-<ion-col>
-<button (click) = "nextMonth()" >
-<ion-icon name="arrow-dropright"></ion-icon>
-</button>
-</ion-col>
-
-</ion-row>
+            <ion-col col-1>
+                <button (click) = "previousMonth()" >
+                    <ion-icon name="arrow-dropleft"></ion-icon>
+                </button>
+            </ion-col> 
 
 
+            <ion-col col-1>
+                <button (click) = "nextMonth()" >
+                    <ion-icon name="arrow-dropright"></ion-icon>
+                </button>
+            </ion-col>
+
+          </ion-row>
 
 
-  <ion-row class = "mytable">
-  <ion-col class = "flex" >
-  <button (click) = "filterByName()">
-  Employees
-  </button>
-  </ion-col>
-  <ion-col *ngFor = "let row of numberOfWeeks ">
- <button (click) = "filterByTime(row)">
-  Week {{row.week}} <br />{{row.weekStart}} <br /> to <br />{{row.weekEnd}}
-</button> 
-  </ion-col>
 
-  <ion-col class = "flex">
-  <button (click) = "filterByTime2()" >
-  Total
-  </button>
-  </ion-col>
+
+          <ion-row class = "mytable" flex-wrap: nowrap align-items: center justify-content: center>
+                
+                <ion-col class = "flex" >
+                    <button (click) = "filterByName()">
+                        Employees
+                    </button>
+                </ion-col>
+
+
+              <ion-col *ngFor = "let row of numberOfWeeks ">
+                   <button (click) = "filterByTime(row)">
+                          Week {{row.week}} <br />{{row.weekStart}} <br /> to <br />{{row.weekEnd}}
+                  </button> 
+              </ion-col>
+
+              <ion-col class = "flex">
+                    <button (click) = "filterByTime2()" >
+                        Total
+                    </button>
+              </ion-col>
  
-  </ion-row>
+          </ion-row>
 
 
-  <ion-row *ngFor="let row of userSummary" class = "mytable" >
-    <ion-col width-50 class = "flex" data-toggle  = "tooltip">
+          <ion-row *ngFor="let row of userSummary" class = "mytable" flex-wrap: nowrap align-items: center justify-content: center>
 
-      {{row.name}}
 
-    </ion-col >
+                <ion-col width-50  data-toggle  = "tooltip">
 
-    <ion-col *ngFor= "let col of row.data" class = "flex">
+                      {{row.name}}
+
+                </ion-col >
+
+
+                <ion-col *ngFor= "let col of row.data" class = "flex">
    
-    {{col.weekTotal}}    
+                      {{col.weekTotal}}    
    
   
-    </ion-col >
+                </ion-col >
 
-    <ion-col class = "flex">
-    {{row.monthTotal}}
-    </ion-col>
+
+                <ion-col class = "flex">
+                      {{row.monthTotal}}
+                </ion-col>
      
-  </ion-row>
-
-  <ion-row *ngIf = "!length" align = "center" class = "mytable"> 
-  <ion-col>
-  No data to display 
-  </ion-col>
-  </ion-row>
-
-</ion-grid>
-</div>
-</div>
+          </ion-row>
 
 
+          <ion-row *ngIf = "!length" align = "center" class = "mytable"> 
+                <ion-col>
+                      No data to display 
+                </ion-col>
+          </ion-row>
 
+        </ion-grid>
 
+      </div>
+
+    </div>
+    
 </ion-content>
 
 
