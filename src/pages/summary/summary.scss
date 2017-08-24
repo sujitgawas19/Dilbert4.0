@@ -1,33 +1,86 @@
 page-summary {
 
 }
-.icons {
-    background-color: #fff;
-    border: 1px solid #7f8c8d;
-    color: #7f8c8d;
-    margin: 0;
-    font-size: 0.9em;
+
+ion-col{
+	font-size : 16px;
+	font : Arial;
 }
- 
-.name {
-    margin: 0;
+
+.mytable{
+ion-col { border: 1px solid grey;
+padding-bottom:15px;
+padding-top:15px;
+padding-left:40px;
+padding-right:40px;
+
+
+ }
 }
- 
-.handle {
-    margin: 0;
+
+.flex{
+	display: flex;
+  justify-content: center;
+  align-items: center;
 }
- 
-.status {
-    white-space: normal;
-    color: #000;
-    margin-top: 5px;
+
+
+
+.fixed-top-color
+{position:fixed;
+top:0;
+left:0;
+right:0;
+height:40%;
+z-index: -1;
+background:#ffdf00;
+background:-webkit-linear-gradient(45deg, #ffdf00 0, #ffda33 100%);
+background:linear-gradient(45deg, #ffdf00 0, #ffda33 100%);
+filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='@ajencyYellow', endColorstr='@ligterYellow', GradientType=1)
 }
- 
-.item {
-    align-items: baseline;
+
+
+.fixed-bottom-color
+{position:fixed;
+bottom:0;
+left:0;
+right:14px;
+height:58%;
+z-index:-1;
+background:#ffdf00;
+background:-webkit-linear-gradient(45deg, #ffdf00 0, #ffda33 100%);background:linear-gradient(45deg, #ffdf00 0, #ffda33 100%);
+filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='@ajencyYellow', endColorstr='@ligterYellow', GradientType=1)
 }
- 
-.button-container {
-    align-self: flex-end;
-    text-align: center;
+
+.card
+{background:#fff;
+border-radius:4px;
+box-shadow:0 0 13px rgba(0,0,0,0.1),0 12px 25px -7px rgba(0,0,0,0.1);
+padding:15px;
+margin-bottom:25px
 }
+
+.card.has-hover
+{position:relative;
+top:0;
+-webkit-transition:box-shadow .5s,top .5s;
+transition:box-shadow .5s,top .5s
+}
+
+.card.has-hover:hover
+{top:-1px;
+box-shadow:0 0 18px rgba(0,0,0,0.15),0 35px 25px -20px rgba(0,0,0,0.1)
+}
+
+.card-body
+{
+position:relative;
+padding-left:40px;
+padding-right:40px;
+}
+
+.form-control:hover{border-color:#757575}
+
+.search-bar {
+   length : 100px
+  }

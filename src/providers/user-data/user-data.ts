@@ -7,7 +7,8 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/observable/throw';
 
-const apiURL = 'http://dilbertapp.ajency.in/api/data/employees';
+// const apiURL = 'http://dilbertapp.ajency.in/api/data/employees';
+  const apiURL = 'http://dilbert.ajency.in/api/data/employees/monthly';
 /*
   Generated class for the UserDataProvider provider.
 
@@ -33,7 +34,7 @@ export class UserDataProvider {
 	let fetchurl = `${apiURL}?user_id=${id}`;
 	 
 	if (date) {
-      fetchurl += `&start_date=${date.start_date}&end_date=${date.end_date}`;
+      fetchurl += `&month=${date.start_date}&year=${date.end_date}`;
     } 
     console.log(fetchurl);  
     return this.http.get(fetchurl, { headers: this.headers })
