@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,PopoverController } from 'ionic-angular';
 import { UserDataProvider } from '../../providers/user-data/user-data';
 
 import {IMyDpOptions} from 'mydatepicker';
@@ -22,6 +22,9 @@ export class SummaryPage {
   private myDatePickerOptions: IMyDpOptions = {
         // other options...
         dateFormat: 'dd.mm.yyyy',
+        disableUntil: {year: 2017, month: 1, day: 1},
+        disableSince: {year: new Date().getFullYear(), month: new Date().getMonth()+1, day:  new Date().getDate() } 
+        // disableUntil: {year: new Date().getFullYear(), month: new Date().getMonth()+1, day:new Date().getDate }
     };
 
 
@@ -33,17 +36,19 @@ export class SummaryPage {
   private length : number =1;
   private numberOfWeeks : any;
   private myDate : any;
-  private flag : number;
+  private flag : boolean;
   private flag2 : any;
-  private flag3 : number;
+  private flag3 : boolean;
   private date : any;
+  private disabled : boolean = false;
 
-  constructor(  public navCtrl: NavController, 
+  constructor(  private popoverCtrl: PopoverController,
+                public navCtrl: NavController, 
         				public navParams: NavParams,
         				private userData : UserDataProvider){
 
       console.log(this.myDate);
-      this.flag = 0;
+      this.flag = false;
       console.log(this.model.date.month);
       this.getUserDate();
   }
@@ -68,12 +73,20 @@ export class SummaryPage {
         {
           this.flag2[i] = 0;
         }
-        this.flag3 = 0;
+        this.flag3 = true;
 
-
+        
 
 
   });
+    if( (this.date.month >= new Date().getMonth()+1) && (this.date.year >= new Date().getFullYear()) ){
+          this.disabled = true;
+          console.log(this.disabled);
+        }
+        else{
+          this.disabled = false;
+          console.log(this.disabled , this.date.month, new Date().getMonth()+1 );
+        }
 }
 
   previousMonth(){
@@ -117,9 +130,9 @@ export class SummaryPage {
 
   filterByName(){
 
-   this.flag = this.flag + 1;
-   this.flag3 = 0;
-   if(this.flag%2){
+   this.flag = !this.flag;
+   this.flag3 = true;
+   if(this.flag){
    this.userSummary = this.userSummary.sort((obj1,obj2) => {
 
     if(obj1.name > obj2.name)
@@ -151,8 +164,8 @@ this.userSummary = this.userSummary.sort((obj1,obj2) => {
 
 
   filterByTime(row){
-    this.flag = 1;
-    this.flag3 = 0;
+    this.flag = true;
+    this.flag3 = true;
     console.log(this.flag2);
     for(var i = 0; i < this.userSummary[0].data.length; i++){
 
@@ -199,26 +212,44 @@ this.userSummary = this.userSummary.sort((obj1,obj2) => {
 
  filterByTime2(){
 
-        this.flag=1;
-        this.flag3 +=1;
-        if(this.flag3%2)
+        this.flag=true;
+        this.flag3 = !this.flag3;
+        if(!this.flag3)
         {
             this.userSummary = this.userSummary.sort((obj1,obj2) => {
       // console.log(obj1.data[0].weekTotal, obj2.data[0].weekTotal);
-              if(obj1.monthTotal >= obj2.monthTotal)
+              let hours1 = obj1.monthTotal.split(':'); 
+              let hours2 = obj2.monthTotal.split(':');
+              // console.log(hours1,hours2);
+              if(parseInt(hours1[0]) > parseInt(hours2[0]))
                 return -1;
-              if(obj1.monthTotal < obj2.monthTotal)
+              else if (parseInt(hours2[0]) > parseInt(hours1[0]))
                  return 1;
+               else{
+                if( parseInt(hours1[1]) >= parseInt(hours2[1]))
+                  return -1;
+                else
+                  return 1;
+               }
         
            });
         }
         else{
           this.userSummary = this.userSummary.sort((obj1,obj2) => {
       // console.log(obj1.data[0].weekTotal, obj2.data[0].weekTotal);
-              if(obj1.monthTotal >= obj2.monthTotal)
+             let hours1 = obj1.monthTotal.split(':'); 
+              let hours2 = obj2.monthTotal.split(':');
+              // console.log(hours1,hours2);
+              if(parseInt(hours1[0]) > parseInt(hours2[0]))
                 return 1;
-              if(obj1.monthTotal < obj2.monthTotal)
-               return -1;
+              else if(parseInt(hours2[0]) > parseInt(hours1[0]))
+                 return -1;
+               else{
+                if(parseInt(hours1[1]) >= parseInt(hours2[1]))
+                  return 1;
+                else
+                  return -1;
+                }
         
            });
 
@@ -314,6 +345,24 @@ this.userSummary = this.userSummary.sort((obj1,obj2) => {
 
   }
 
+presentPopover(ev) {
+    let popover = this.popoverCtrl.create('OptionsPage', {
+    });
+    // let eve = {
+  // target : {
+  //   getBoundingClientRect : () => {
+  //     return {
+  //       top: '55',
+  //       left : '100',
+      
+  //     };
+  //   }
+  // }
+// }
+    popover.present({
+      ev: ev
+    });
+  }
 
 
 

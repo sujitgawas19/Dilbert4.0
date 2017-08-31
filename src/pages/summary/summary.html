@@ -4,123 +4,181 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
+<!-- <ion-header>
 	<ion-navbar>
-		<ion-title>Ajency.in  Work Summary</ion-title>
-     &nbsp;&nbsp;&nbsp;Track Time. Record Work. Boost productivity.
+		<ion-title>Ajency.in</ion-title>
+
+     <ion-buttons end>
+        <button ion-button icon-only (click)="presentPopover($event)">
+          Sujit Gawas <ion-icon name="arrow-dropdown"></ion-icon> 
+        </button>
+      </ion-buttons>
+    
 	</ion-navbar>
-</ion-header>
+</ion-header> -->
 
 
-<ion-content padding>
-
-  <div class="fixed-bottom-color"> </div>
-
-    <div class="card-body"  class="card">
-
-      <div class="form-control"> 
+<ion-content >
 
 
-        <ion-grid floating >
-
-          <ion-row >
-            <ion-col col-3>
-                <ion-searchbar class = "search-bar" (ionInput)="callFilter()" [(ngModel)]="myInput"  autocomplete = "on" autocorrect = "on" placeholder = "Filter by Name"></ion-searchbar>
-            </ion-col>
-
-            <ion-col offset-5>
-
-                <my-date-picker [options]="myDatePickerOptions" (dateChanged)="requestData($event)" [(ngModel)]="model" required placeholder = "Jump to date" >
-                    
-                </my-date-picker>
-            </ion-col>
+<div class = "container">
+  <div > 
+    <div class="col-md-12">
 
 
-            <ion-col col-1>
-                <button (click) = "previousMonth()" >
-                    <ion-icon name="arrow-dropleft"></ion-icon>
-                </button>
-            </ion-col> 
-
-
-            <ion-col col-1>
-                <button (click) = "nextMonth()" >
-                    <ion-icon name="arrow-dropright"></ion-icon>
-                </button>
-            </ion-col>
-
-          </ion-row>
-
-
-
-
-          <ion-row class = "mytable" flex-wrap: nowrap align-items: center justify-content: center>
-                
-                <ion-col class = "flex" >
-                    <button (click) = "filterByName()">
-                        Employees
-                    </button>
-                </ion-col>
-
-
-              <ion-col *ngFor = "let row of numberOfWeeks ">
-                   <button (click) = "filterByTime(row)">
-                          Week {{row.week}} <br />{{row.weekStart}} <br /> to <br />{{row.weekEnd}}
-                  </button> 
-              </ion-col>
-
-              <ion-col class = "flex">
-                    <button (click) = "filterByTime2()" >
-                        Total
-                    </button>
-              </ion-col>
- 
-          </ion-row>
-
-
-          <ion-row *ngFor="let row of userSummary" class = "mytable" flex-wrap: nowrap align-items: center justify-content: center>
-
-
-                <ion-col width-50  data-toggle  = "tooltip">
-
-                      {{row.name}}
-
-                </ion-col >
-
-
-                <ion-col *ngFor= "let col of row.data" class = "flex">
-   
-                      {{col.weekTotal}}    
-   
-  
-                </ion-col >
-
-
-                <ion-col class = "flex">
-                      {{row.monthTotal}}
-                </ion-col>
-     
-          </ion-row>
-
-
-          <ion-row *ngIf = "!length" align = "center" class = "mytable"> 
-                <ion-col>
-                      No data to display 
-                </ion-col>
-          </ion-row>
-
-        </ion-grid>
-
+      <div class="user-page-title">
+          <h1 class="dashboard-title"> Ajency.in  Work Summary </h1> 
+          <h4 class="sub-title dash">Track Time. Record Work. Boost Productivity.</h4>
       </div>
 
+
+        
+      <div class="company-summary card" >
+        <div class="card-header">
+          <div class = "row">
+
+
+            <div class="pull-left col-sm-3">
+            
+
+                <span class="search-emp-names">
+                    <ion-searchbar class = "noshadow" (ionInput)="callFilter()" [(ngModel)]="myInput"  autocomplete = "on" autocorrect = "on" placeholder = "Filter by Name"></ion-searchbar>
+                </span>
+            </div>
+
+            <div class="col-sm-6">
+                  <!-- blank space -->
+            </div>
+
+            <div class="col-sm-2" style="align-self: center;">
+
+                <my-date-picker [options]="myDatePickerOptions" (dateChanged)="requestData($event)" [(ngModel)]="model" required placeholder = "Jump to date"  >
+                    
+                </my-date-picker> 
+            </div>
+
+            <div class="col-sm-1" style="align-self: center;">
+                <button  (click) = "previousMonth()"  >
+                    <i class="fa fa-angle-left"></i>
+                </button>
+
+
+                 <button  (click) = "nextMonth()" [disabled] = "disabled" >
+                   <i class="fa fa-angle-right"></i>
+                </button>
+            
+
+            </div>
+
+
+          </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+
+       <div class="card-body">
+          <div class="table-view month hscroll-table hide-in-week-view">
+            <div class="table-responsive">
+        
+              <table class="table first-table">
+
+                  <tr class="mytable"  >
+                
+                    <th class = "flex" class="employee-id"   >
+                      <div class="th-label small-title" >
+                          <span class="th-date" (click) = "filterByName()" >
+                                  EMPLOYEES <i class="fa fa-sort"></i>
+                          </span>
+
+                     </div> 
+                    </th>
+
+
+                    <th *ngFor = "let row of numberOfWeeks " class="th-label small-title" >
+                      <span class="th-date">
+                         <span class="sort-col" (click) = "filterByTime(row)" style="text-align: center;" >
+                              Week {{row.week}} <br />{{row.weekStart}} <br /> to <br />{{row.weekEnd}} <i class="fa fa-sort"></i>
+                        </span>
+                      </span>   
+                    </th>
+
+                    <th class = "flex" class="th-label small-title"  >
+                      <span  class="th-date" (click) = "filterByTime2()" >
+                          Total <i class="fa fa-sort"></i>
+                      </span>
+                    </th>
+ 
+                  </tr>
+
+
+                  <tr *ngFor="let row of userSummary" class="mytable"  >
+
+
+                    <td  class="employee-id">
+                      <div class="employee-name">
+                  
+                          <a href="http://dilbertapp.ajency.in/dashboard/{{row.email}}" >
+                              <span  class="th-total" title="More details of this employee">
+                                  {{row.name}} <i class="fa fa-angle-right"></i>
+                              </span>
+                          </a>
+                     
+                      </div>
+                    </td>
+
+                   <ng-container *ngIf = "row.monthTotal != '00:00' ">
+                    <td *ngFor= "let col of row.data" class = "flex" class="single-day" >
+                        <div class="th-total" >
+                            {{col.weekTotal}}    
+                        </div>  
+                    </td >
+                   </ng-container>
+
+                   <ng-container *ngIf = "row.data.length == 5 && row.monthTotal == '00:00'">
+                    <td  colspan="5"   align = "center" class = "mytable th-total ">
+                        No Data Acquired
+                    </td>
+                    </ng-container>
+                    
+                    <ng-container *ngIf = "row.data.length == 6 && row.monthTotal == '00:00'">
+                    <td  colspan="6"   align = "center" class = "mytable th-total">
+                        No Data Acquired
+                    </td>
+                    </ng-container>
+
+                    <td class = "flex" class="single-day total current">
+                        <div class="th-total">
+                            {{row.monthTotal}}
+                        </div>    
+                    </td>
+     
+                  </tr>
+
+
+                  <tr *ngIf = "!length" align = "center" class = "mytable"> 
+                    <td colspan="9" class="noData">
+                      No data to display 
+                    </td>
+                  </tr>
+
+              </table>
+
+            </div>
+          </div>     
+        </div>
+      </div>
     </div>
-    
+  </div>
+</div>
+
 </ion-content>
 
 
-<ion-footer>
+<!-- <ion-footer>
   <ion-toolbar>
     <p align = "center"> By
     <a  href="http://ajency.in"> Ajency.in </a> </p>
   </ion-toolbar>
 </ion-footer>
+ -->

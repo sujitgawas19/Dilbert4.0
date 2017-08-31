@@ -1,0 +1,47 @@
+<!--
+  Generated template for the OptionsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<!-- <ion-header>
+
+  <ion-navbar>
+    <ion-title>options</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+ <ion-buttons end>
+      <button>
+    <ion-label>Sujit Gawas</ion-label>
+    <ion-list>
+    <ion-item>
+    <ion-select [(ngModel)]="options">
+      <ion-option value="nes">View Employee Details</ion-option>
+      <ion-option value="n64">View Summary</ion-option>
+      <ion-option value="ps">Organizations</ion-option>
+      <ion-option value="genesis">Roles and Permissions</ion-option>
+      <ion-option value="saturn">Edit Profile</ion-option>
+      <ion-option value="snes">Logout</ion-option>
+    </ion-select>
+    </ion-item>
+   </ion-list> 
+  </button>
+</ion-buttons>
+</ion-content>
+ -->
+<ion-content  class = "scroll">
+ <ion-list>
+	  
+      <button ion-item (click) = "goTo()"> <ion-icon name="list"></ion-icon>  View Employee Details</button>
+      <button ion-item (click) = "goTo()"> <ion-icon name="list"></ion-icon>  View Summary</button>
+      <button ion-item (click) = "goTo()"> <ion-icon name="bookmark"></ion-icon>  Organizations</button>
+      <button ion-item (click) = "goTo()"> <ion-icon name="barcode"></ion-icon>  Roles and Permissions</button>
+      <button ion-item (click) = "goTo()"> <ion-icon name="person"></ion-icon>  Edit Profile</button>
+      <button ion-item (click) = "goTo()"> <ion-icon name="exit"></ion-icon>  Logout</button>
+</ion-list>
+</ion-content>
