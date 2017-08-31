@@ -42,6 +42,7 @@ export class SummaryPage {
   private date : any;
   private disabled : boolean = false;
 
+
   constructor(  private popoverCtrl: PopoverController,
                 public navCtrl: NavController, 
         				public navParams: NavParams,
@@ -60,7 +61,8 @@ export class SummaryPage {
   }
 
   getData(date){
-  	this.userData.getUserData(69,date).subscribe( (response) => {
+    console.log(this.userData.user_data.id);
+  	this.userData.getUserData(this.userData.user_data.id,date).subscribe( (response) => {
         
         this.userSummary = response;
         this.userSummary2 = response;

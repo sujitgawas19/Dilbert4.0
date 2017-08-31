@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { LocalStorageService } from 'ng2-webstorage';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -19,18 +20,26 @@ import 'rxjs/add/observable/throw';
 export class UserDataProvider {
 
 	headers : any;
+  user_data:any;
 
-  constructor(public http: Http) {
+
+  constructor(public http: Http, public localStorage : LocalStorageService) {
     console.log('Hello UserDataProvider Provider');
     this.headers = new Headers();
     this.headers.append('Content-Type', 'application/json');
-    this.headers.append('X-API-KEY', 'wLFnEXuo9j52B5Ylf3JVAA1fAeDMfeVHUpJFTM569YhyyspVrqK4GLCAIeUn');
+//     this.storage.get('e').then( (data) => {
+// this.user_data = data;
+// console.log(this.user_data); 
+// });
+    this.user_data = this.localStorage.retrieve('user_data');
+    console.log(this.user_data);
+    this.headers.append('X-API-KEY', this.user_data.api_token);
 
   }
 
 
   getUserData(id, date): Observable<any> {
-  	console.log('getUserData function');
+  	console.log('getUserData function', id);
 	let fetchurl = `${apiURL}?user_id=${id}`;
 	 
 	if (date) {

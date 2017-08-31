@@ -8,6 +8,8 @@ import { MyApp } from './app.component';
 import { UserDataProvider } from '../providers/user-data/user-data';
 import { HttpModule } from '@angular/http';
 // import { HomePage } from '../pages/home/home';
+import { Ng2Webstorage } from 'ng2-webstorage';
+
 
 @NgModule({
   declarations: [
@@ -17,7 +19,8 @@ import { HttpModule } from '@angular/http';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    HttpModule
+    HttpModule,
+    Ng2Webstorage
   ],
   bootstrap: [IonicApp],
   entryComponents: [
